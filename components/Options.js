@@ -1,19 +1,33 @@
 import React from 'react';
 import { FlatList, Alert, Button, StyleSheet, Text, View } from 'react-native';
 
-//import OptionsItem from './OptionsItem';
+import OptionsItem from './OptionsItem';
 
 export default class Options extends React.Component {
   constructor(props){
     super(props);
-    this.middleButton = this.middleButton.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this);
     this.optionList = this.optionList.bind(this);
+    this.onPressItem = this.onPressItem.bind(this);
     this.state = {
       showOptions : false,
     }
   }
 
-  middleButton(){
+  onPressItem(item) {
+    switch (item.key) {
+      case 'New Game':
+        Alert.alert('issa new game');
+        break;
+      case 'Undo Move':
+        Alert.alert('hacking');
+        break;
+      default:
+        Alert.alert('default');
+    }
+  }
+
+  toggleOptions(){
     this.setState({
       showOptions: !this.state.showOptions,
     });
@@ -35,10 +49,9 @@ export default class Options extends React.Component {
         {key: 'Something else'},
       ]}
       renderItem={({item}) =>
-        <Button
-          style={styles.item}
-          onPress={()=>{ Alert.alert(item.key);}}
-          title={item.key}
+        <OptionsItem
+            item={item}
+            onPressItem={this.onPressItem}
         />
         }
     />);
@@ -57,7 +70,7 @@ export default class Options extends React.Component {
         justifyContent: 'center',
       alignItems: 'center'}}>
           {this.optionList()}
-          <Button onPress={this.middleButton}
+          <Button onPress={this.toggleOptions}
                   style={styles.other}
                   title="Options"
           />
@@ -87,3 +100,10 @@ const styles = StyleSheet.create({
     height: 44,
   },
 });
+
+
+       {/* <Button
+          style={styles.item}
+          onPress={()=>{ Alert.alert(item.key);}}
+          title={item.key}
+        /> */}
