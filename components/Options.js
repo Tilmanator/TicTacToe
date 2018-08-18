@@ -17,14 +17,17 @@ export default class Options extends React.Component {
   onPressItem(item) {
     switch (item.key) {
       case 'New Game':
-        Alert.alert('issa new game');
+        this.props.newGame();
         break;
       case 'Undo Move':
-        Alert.alert('hacking');
+        Alert.alert('Not working');
         break;
       default:
-        Alert.alert('default');
+        Alert.alert('Nothing happens.');
     }
+    this.setState({
+      showOptions: !this.state.showOptions,
+    });
   }
 
   toggleOptions(){

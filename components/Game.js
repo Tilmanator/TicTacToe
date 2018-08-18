@@ -57,16 +57,16 @@ export default class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    // const moves = history.map((step, move) => {
-    //   const desc = move ?
-    //     'Go to move #' + move :
-    //     'Go to game start';
-    //   return (
-    //     <li key={move}>
-    //       <button onClick={() => this.jumpTo(move)}>{desc}</button>
-    //     </li>
-    //   );
-    // });
+    const moves = history.map((step, move) => {
+      const desc = move ?
+        'Go to move #' + move :
+        'Go to game start';
+      return (
+        <li key={move}>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    });
 
     const newGame = (
       <button onClick={() => this.newGame()}>New Game</button>
@@ -75,12 +75,20 @@ export default class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+      Alert.alert(status);
     } else if (this.state.stepNumber < 9) {
       status = 'Next player: ' + (this.state.xNext ? 'X' : 'O');
     }
     else{
       status = "Tie game!";
+      Alert.alert(status);
     }
+
+    // if(winner){
+    //   return (
+    //       <View style={{flex:5, backgroundColor: 'black'}}></View>
+    //   );
+    // }
     return (
       <Board
         squares={current.squares}

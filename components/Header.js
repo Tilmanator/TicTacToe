@@ -11,7 +11,7 @@ export default class Header extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          Spider Solitaire
+          Tic Tac Toe
         </Text>
       </View>
     );
